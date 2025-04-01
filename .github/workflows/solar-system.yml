@@ -114,3 +114,9 @@ jobs:
           run: |
             wget -qO- http://localhost:3000 || echo "Failed to access the app"
 
+        - name: Push image to Docker Hub
+          uses: docker/build-push-action@v4
+          with:
+              context: .
+              push: true
+              tags: ${{ vars.DOCKER_USERNAME }}/nodejs-demo:1.0
