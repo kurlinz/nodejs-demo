@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      #- main
       - 'feature/*'
 env:
     MONGO_URI: ${{ vars.MONGO_URL }}
