@@ -7,7 +7,7 @@ on:
       - main
       - 'feature/*'
 env:
-    MONGO_URL: ${{ env.MONGO_URL }}
+    MONGO_URI: ${{ env.MONGO_URL }}
     MONGO_USERNAME: ${{ env.MONGO_USERNAME }}
     MONGO_PASSWORD: ${{ env.MONGO_PASSWORD }}
 jobs:
