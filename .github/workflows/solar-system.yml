@@ -78,3 +78,17 @@ jobs:
             name: Coverage-Report
             path: coverage-results
             retention-days: 5
+
+    docker:
+        name: Docker
+        needs: [unit-testing, code-coverage]
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v3
+
+        - name: Log in to Docker Hub
+          uses: docker/login-action@v2
+          with:
+            username: ${{ vars.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_PASSWORD }}
