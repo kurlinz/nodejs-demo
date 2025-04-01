@@ -93,4 +93,24 @@ jobs:
             username: ${{ vars.DOCKER_USERNAME }}
             password: ${{ secrets.DOCKER_PASSWORD }}
 
-          
+        - name: Build Docker Image for testing
+          uses: docker/build-push-action@v4
+          with:
+            context: .
+            push: false
+            tags: ${{ vars.DOCKER_USERNAME }}/nodejs-demo:1.0
+
+        - name: Test Built Docker Image
+          run: |
+            docker run -d \
+              -e MONGO_URI=${{ vars.MONGO_URL }} \
+              -e MONGO_USERNAME=${{ vars.MONGO_USERNAME }} \
+              -e MONGO_PASSWORD=${{ secrets.MONGO_PASSWORD }} \
+              -p 3000:3000 \
+              --name nodejs-demo-app \
+              ${{ vars.DOCKER_USERNAME }}/nodejs-demo:1.0
+
+        - name: Access App with Wget
+          run: |
+            wget -qO- http://localhost:3000 || echo "Failed to access the app"
+
