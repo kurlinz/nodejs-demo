@@ -57,14 +57,24 @@ jobs:
     code-coverage:
         name: Code Coverage
         runs-on: ubuntu-latest
+        container:
+          image: node:18
+        services:
+          mongo:
+            image: mongo:latest
+            ports:
+              - 27017:27017
+            env:
+              MONGO_INITDB_ROOT_USERNAME: ${{ vars.MONGO_USERNAME }}
+              MONGO_INITDB_ROOT_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
         steps:
         - name: Checkout Repository
           uses: actions/checkout@v3
 
-        - name: Setup NodeJS Version
-          uses: actions/setup-node@v3
-          with:
-             node-version: 18
+        # - name: Setup NodeJS Version
+        #   uses: actions/setup-node@v3
+        #   with:
+        #      node-version: 18
 
         - name: Cache Npm dependencies
           uses: actions/cache@v3
