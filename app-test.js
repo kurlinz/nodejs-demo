@@ -6,7 +6,7 @@ let chaiHttp = require("chai-http");
 
 // Assertion 
 chai.should();
-chai.use(chaiHttp); 
+chai.use(chaiHttp);
 
 describe('Planets API Suite', () => {
 
