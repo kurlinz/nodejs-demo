@@ -150,28 +150,28 @@ jobs:
                 ghcr.io/${{ github.repository_owner }}/nodejs-demo:1.0
 
     dev-deply:
-          name: Dev-Deployment to K8s
-          needs: [docker]
-          runs-on: ubuntu-latest
-          steps:
-          - name: Checkout Repository
-            uses: actions/checkout@v3
+        name: Dev-Deployment to K8s
+        needs: [docker]
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v3
 
-          - name: install kubectl
-            uses: azure/setup-kubectl@v4
-            with:
-              version: 'v1.32.3'
-          
-          - name: Set Kubernetes Context
-            uses: azure/k8s-set-context@v4
-            with:
-              method: kubeconfig
-              kubeconfig: ${{ secrets.KUBECONFIG }}
+        - name: install kubectl
+          uses: azure/setup-kubectl@v4
+          with:
+            version: 'v1.32.3'
+        
+        - name: Set Kubernetes Context
+          uses: azure/k8s-set-context@v4
+          with:
+            method: kubeconfig
+            kubeconfig: ${{ secrets.KUBE_CONFIG }}
 
-          - name: fetch cluster details
-            run: |
-              kubectl config view
-              kubectl version
-              kubectl cluster-info
-              kubectl get nodes
+        - name: fetch cluster details
+          run: |
+            kubectl config view
+            kubectl version
+            kubectl cluster-info
+            kubectl get nodes
 
