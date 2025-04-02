@@ -152,7 +152,7 @@ jobs:
     dev-deply:
         name: Dev-Deployment to K8s
         needs: [docker]
-        runs-on: ubuntu-latest
+        runs-on: [self-hosted, controlplane]
         steps:
         - name: Checkout Repository
           uses: actions/checkout@v3
