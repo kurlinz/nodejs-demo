@@ -93,6 +93,13 @@ jobs:
             username: ${{ vars.DOCKER_USERNAME }}
             password: ${{ secrets.DOCKER_PASSWORD }}
 
+        - name: GHCR login
+          uses: docker/login-action@v2
+          with:
+              registry: ghcr.io
+              username: ${{ github.repository_owner }}
+              password: ${{ secrets.GITHUB_TOKEN }}
+  
         - name: Build Docker Image for testing
           uses: docker/build-push-action@v4
           with:
@@ -114,9 +121,11 @@ jobs:
           run: |
             wget -qO- http://localhost:3000 || echo "Failed to access the app"
 
-        - name: Push image to Docker Hub
+        - name: Push image to Docker/GHCR
           uses: docker/build-push-action@v4
           with:
               context: .
               push: true
-              tags: ${{ vars.DOCKER_USERNAME }}/nodejs-demo:1.0
+              tags: |
+                ${{ vars.DOCKER_USERNAME }}/nodejs-demo:1.1
+                ghcr.io/${{ github.repository_owner }}/nodejs-demo:1.0
