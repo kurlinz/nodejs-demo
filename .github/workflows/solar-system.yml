@@ -168,10 +168,21 @@ jobs:
             method: kubeconfig
             kubeconfig: ${{ secrets.KUBE_CONFIG }}
 
+        - name: Replace Placeholders
+          uses: cschleiden/replace-tokens@v1
+          with:
+            tokenPrefix: _{_
+            tokenSuffix: _}_
+            files: '["kubernetes/development/*.yaml"]'
+          env:
+            NAMESPACE: ${{ vars.NAMESPACE }}
+            REPLICAS: ${{ vars.REPLICAS }}
+            IMAGE: ${{ vars.DOCKER_USERNAME }}/nodejs-demo:1.1
+
         - name: fetch cluster details
           run: |
             kubectl config view
             kubectl version -o yaml
             kubectl cluster-info
             kubectl get nodes
-            
+            cat kubernetes/development/*.yaml

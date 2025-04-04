@@ -24,6 +24,13 @@ spec:
         - containerPort: 3000
           name: http
           protocol: TCP
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
         envFrom:
         - secretRef:
             name: mongo-db-creds
