@@ -152,7 +152,7 @@ jobs:
     dev-deply:
         name: Dev-Deployment to K8s
         needs: [docker]
-        runs-on: ubuntu-latest
+        runs-on: self-hosted
         steps:
         - name: Checkout Repository
           uses: actions/checkout@v3
@@ -160,7 +160,7 @@ jobs:
         - name: install kubectl
           uses: azure/setup-kubectl@v4
           with:
-            version: 'v1.28.1'
+            version: 'v1.32.3'
         
         - name: Set Kubernetes Context
           uses: azure/k8s-set-context@v4
