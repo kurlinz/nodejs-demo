@@ -171,6 +171,8 @@ jobs:
         - name: Replace Placeholders
           uses: cschleiden/replace-tokens@v1
           with:
+            tokenPrefix: _{_
+            tokenSuffix: _}
             files: |
               kubernetes/development/deployment.yaml
               kubernetes/development/service.yaml
