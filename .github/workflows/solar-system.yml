@@ -171,9 +171,10 @@ jobs:
         - name: Replace Placeholders
           uses: cschleiden/replace-tokens@v1
           with:
-            tokenPrefix: _{_
-            tokenSuffix: _}_
-            files: '["kubernetes/development/*.yaml"]'
+            files: |
+              kubernetes/development/deployment.yaml
+              kubernetes/development/service.yaml
+              kubernetes/development/ingress.yaml
           env:
             NAMESPACE: ${{ vars.NAMESPACE }}
             REPLICAS: ${{ vars.REPLICAS }}
