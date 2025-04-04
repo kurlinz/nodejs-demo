@@ -6,8 +6,8 @@ metadata:
   name: solar-system
   namespace: _{_NAMESPACE_}_
 spec:
+  replicas: 3
   replicas: _{_REPLICAS_}_
-  selector:
     matchLabels:
       app: solar-system
   strategy: {}
